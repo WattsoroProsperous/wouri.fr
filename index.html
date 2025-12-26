@@ -1502,17 +1502,17 @@
 
         .preview-card {
             position: relative;
-            background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+            background: rgba(255,255,255,0.05);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: var(--radius-3xl);
             padding: var(--space-6);
             box-shadow:
-                0 50px 100px -20px rgba(0,0,0,0.5),
-                0 30px 60px -30px rgba(0,0,0,0.4),
+                0 25px 50px -12px rgba(0,0,0,0.4),
                 inset 0 1px 0 rgba(255,255,255,0.1);
             overflow: hidden;
+            transition: all 0.4s var(--ease-out-expo);
         }
 
         .preview-card::before {
@@ -1526,22 +1526,15 @@
             pointer-events: none;
         }
 
-        /* Animated Border */
-        .preview-card::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: linear-gradient(90deg, var(--brand-orange), var(--brand-lavender), var(--brand-green), var(--brand-orange));
-            background-size: 300% 100%;
-            border-radius: calc(var(--radius-3xl) + 2px);
-            z-index: -1;
-            animation: borderFlow 4s linear infinite;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .hero-visual:hover .preview-card::after {
-            opacity: 0.5;
+        /* Glassmorphism hover effect */
+        .hero-visual:hover .preview-card {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.15);
+            box-shadow:
+                0 32px 64px -16px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.15),
+                0 0 0 1px rgba(255,255,255,0.05);
+            transform: translateY(-4px);
         }
 
         /* Browser Chrome */
@@ -2063,6 +2056,7 @@
         .bento-md { grid-column: span 4; grid-row: span 2; }
         .bento-sm { grid-column: span 4; }
         .bento-wide { grid-column: span 6; }
+        .bento-quarter { grid-column: span 3; }
 
         /* Bento Content */
         .bento-content {
@@ -2821,6 +2815,7 @@
             .bento-md { grid-column: span 6; }
             .bento-sm { grid-column: span 6; }
             .bento-wide { grid-column: span 6; }
+            .bento-quarter { grid-column: span 6; }
 
             .floating-card { display: none; }
         }
@@ -2962,7 +2957,7 @@
                 font-size: 0.75rem;
             }
 
-            .bento-lg, .bento-md, .bento-sm, .bento-wide {
+            .bento-lg, .bento-md, .bento-sm, .bento-wide, .bento-quarter {
                 grid-column: span 12;
             }
 
@@ -3604,10 +3599,22 @@
            LIGHT MODE CARDS & CONTAINERS
         ============================================ */
         [data-theme="light"] .preview-card {
-            background: var(--gradient-card-light);
+            background: rgba(255,255,255,0.7);
             backdrop-filter: blur(40px);
-            border: 1px solid var(--border-primary);
-            box-shadow: var(--shadow-light-xl);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow:
+                0 25px 50px -12px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        [data-theme="light"] .hero-visual:hover .preview-card {
+            background: rgba(255,255,255,0.85);
+            border-color: rgba(0,0,0,0.1);
+            box-shadow:
+                0 32px 64px -16px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.9),
+                0 0 0 1px rgba(0,0,0,0.03);
         }
 
         [data-theme="light"] .preview-card::before {
@@ -5041,7 +5048,7 @@
                     </div>
 
                     <!-- Cloud -->
-                    <div class="bento-item bento-sm anim-scale hover-lift icon-animate">
+                    <div class="bento-item bento-quarter anim-scale hover-lift icon-animate">
                         <div class="bento-content">
                             <div class="bento-icon"><i class="fas fa-cloud"></i></div>
                             <h3 class="bento-title">Cloud & DevOps</h3>
@@ -5053,7 +5060,7 @@
                     </div>
 
                     <!-- Security -->
-                    <div class="bento-item bento-sm anim-scale hover-lift icon-animate">
+                    <div class="bento-item bento-quarter anim-scale hover-lift icon-animate">
                         <div class="bento-content">
                             <div class="bento-icon"><i class="fas fa-shield-alt"></i></div>
                             <h3 class="bento-title">Cybersecurite</h3>
@@ -5065,7 +5072,7 @@
                     </div>
 
                     <!-- UX/UI -->
-                    <div class="bento-item bento-wide anim-fade-left hover-lift icon-animate">
+                    <div class="bento-item bento-quarter anim-fade-left hover-lift icon-animate">
                         <div class="bento-content">
                             <div class="bento-icon"><i class="fas fa-palette"></i></div>
                             <h3 class="bento-title">Design UI/UX</h3>
@@ -5077,7 +5084,7 @@
                     </div>
 
                     <!-- Data -->
-                    <div class="bento-item bento-wide anim-fade-right hover-lift icon-animate">
+                    <div class="bento-item bento-quarter anim-fade-right hover-lift icon-animate">
                         <div class="bento-content">
                             <div class="bento-icon"><i class="fas fa-brain"></i></div>
                             <h3 class="bento-title">Data & Intelligence</h3>
