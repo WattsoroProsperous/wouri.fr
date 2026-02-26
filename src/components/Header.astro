@@ -34,7 +34,6 @@
 <script is:inline>
     // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
-    const themeOverlay = document.getElementById('themeOverlay');
     const logoDark = document.querySelector('.logo-dark');
     const logoLight = document.querySelector('.logo-light');
     const footerLogoDark = document.querySelector('.footer-logo-dark');
@@ -47,16 +46,7 @@
         updateLogo('light');
     }
 
-    themeToggle.addEventListener('click', (e) => {
-        const rect = themeToggle.getBoundingClientRect();
-        const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
-        const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
-
-        themeOverlay.style.setProperty('--click-x', `${x}%`);
-        themeOverlay.style.setProperty('--click-y', `${y}%`);
-        themeOverlay.classList.add('active');
-        setTimeout(() => themeOverlay.classList.remove('active'), 600);
-
+    themeToggle.addEventListener('click', () => {
         const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         html.setAttribute('data-theme', newTheme);

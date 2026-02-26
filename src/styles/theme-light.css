@@ -160,18 +160,21 @@
    LIGHT HERO
 ============================================ */
 [data-theme="light"] .hero {
-    background: var(--gradient-hero-light);
+    background: #ffffff;
 }
 
 [data-theme="light"] .hero-bg::before {
-    background: var(--gradient-mesh-light);
-    opacity: 1;
+    background: none;
+    opacity: 0;
 }
 
 [data-theme="light"] .hero-grid {
     background-image:
-        linear-gradient(rgba(116,124,173,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(116,124,173,0.06) 1px, transparent 1px);
+        linear-gradient(rgba(234,139,56,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(234,139,56,0.12) 1px, transparent 1px);
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    opacity: 0.8;
 }
 
 [data-theme="light"] .hero-badge {
@@ -261,7 +264,7 @@
    LIGHT SERVICES
 ============================================ */
 [data-theme="light"] .services {
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
 }
 
 [data-theme="light"] .service-card {
@@ -393,23 +396,53 @@
    LIGHT CTA
 ============================================ */
 [data-theme="light"] .cta {
-    background: var(--bg-secondary);
+    background: #0a0a0a;
 }
 
 [data-theme="light"] .cta::before {
     background: radial-gradient(
         ellipse at center,
-        rgba(234,139,56,0.06) 0%,
+        rgba(234,139,56,0.1) 0%,
         transparent 60%
     );
 }
 
 [data-theme="light"] .cta-title {
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 [data-theme="light"] .cta-text {
-    color: var(--text-secondary);
+    color: rgba(255,255,255,0.55);
+}
+
+[data-theme="light"] .cta .btn-primary {
+    background: #ffffff;
+    color: #0a0a0a;
+    box-shadow:
+        0 1px 2px rgba(0,0,0,0.2),
+        0 1px 3px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+[data-theme="light"] .cta .btn-primary:hover {
+    background: #f0f0f0;
+    box-shadow:
+        0 4px 8px rgba(0,0,0,0.25),
+        0 8px 24px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+[data-theme="light"] .cta .btn-secondary {
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    box-shadow: none;
+}
+
+[data-theme="light"] .cta .btn-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.25);
+    color: #ffffff;
 }
 
 /* ============================================
@@ -493,6 +526,87 @@
 [data-theme="light"] .form-group input::placeholder,
 [data-theme="light"] .form-group textarea::placeholder {
     color: var(--text-muted);
+}
+
+/* ============================================
+   LIGHT METHODE
+============================================ */
+[data-theme="light"] .methode {
+    background: var(--bg-primary);
+}
+
+[data-theme="light"] .step-number {
+    color: var(--brand-orange);
+}
+
+[data-theme="light"] .step-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .step-text {
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   LIGHT VALEURS
+============================================ */
+[data-theme="light"] .valeurs {
+    background: var(--bg-primary);
+}
+
+[data-theme="light"] .valeur-card {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    box-shadow: 0 1px 3px rgba(116,124,173,0.06);
+}
+
+[data-theme="light"] .valeur-card:hover {
+    border-color: rgba(116,124,173,0.18);
+    box-shadow:
+        0 4px 12px rgba(116,124,173,0.08),
+        0 1px 3px rgba(116,124,173,0.06);
+}
+
+[data-theme="light"] .valeur-icon,
+[data-theme="light"] .valeur-icon--blue,
+[data-theme="light"] .valeur-icon--purple {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .valeur-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .valeur-text {
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   LIGHT FAQ
+============================================ */
+[data-theme="light"] .faq {
+    background: var(--bg-primary);
+}
+
+[data-theme="light"] .faq-item {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+}
+
+[data-theme="light"] .faq-item[open] {
+    border-color: rgba(116,124,173,0.2);
+}
+
+[data-theme="light"] .faq-question {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .faq-chevron {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .faq-answer p {
+    color: var(--text-secondary);
 }
 
 /* ============================================
