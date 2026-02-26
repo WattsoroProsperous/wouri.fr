@@ -1,5 +1,5 @@
 /* ============================================
-   THEME TOGGLE BUTTON - SPECIAL DESIGN
+   THEME TOGGLE BUTTON
 ============================================ */
 .theme-toggle {
     position: relative;
@@ -23,10 +23,7 @@
     background: linear-gradient(135deg, #f5f3ce 0%, #fff9db 100%);
     border-radius: 50%;
     transition: all 0.5s var(--ease-spring);
-    box-shadow:
-        0 0 10px rgba(255, 249, 219, 0.5),
-        0 0 20px rgba(255, 249, 219, 0.3),
-        inset -3px -3px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(255,249,219,0.5), 0 0 20px rgba(255,249,219,0.3);
     z-index: 2;
 }
 
@@ -51,7 +48,6 @@
     opacity: 1;
 }
 
-/* Stars effect in dark mode */
 .theme-toggle .stars {
     position: absolute;
     inset: 0;
@@ -67,7 +63,7 @@
     animation: twinkle 1.5s infinite;
 }
 
-.theme-toggle .star:nth-child(1) { top: 6px; left: 35px; animation-delay: 0s; }
+.theme-toggle .star:nth-child(1) { top: 6px; left: 35px; }
 .theme-toggle .star:nth-child(2) { top: 14px; left: 42px; animation-delay: 0.3s; }
 .theme-toggle .star:nth-child(3) { top: 22px; left: 38px; animation-delay: 0.6s; }
 .theme-toggle .star:nth-child(4) { top: 10px; left: 48px; animation-delay: 0.9s; }
@@ -78,44 +74,36 @@
 }
 
 /* ============================================
-   LIGHT MODE THEME
+   LIGHT MODE VARIABLES
 ============================================ */
 [data-theme="light"] {
-    /* Light Mode Colors - Based on Logo */
     --bg-primary: #fefefe;
     --bg-secondary: #f8f9fc;
     --bg-tertiary: #f0f2f7;
     --bg-card: #ffffff;
     --bg-glass: rgba(255,255,255,0.8);
 
-    /* Text Colors */
     --text-primary: #1a1a2e;
     --text-secondary: #4a4a6a;
     --text-tertiary: #6b7280;
     --text-muted: #9ca3af;
 
-    /* Border Colors */
-    --border-primary: rgba(116,124,173,0.15);
-    --border-secondary: rgba(116,124,173,0.08);
+    --border-light: rgba(116,124,173,0.15);
+    --border-light-soft: rgba(116,124,173,0.08);
 
-    /* Gradients Light Mode */
-    --gradient-hero: linear-gradient(180deg, #f8f9fc 0%, #fefefe 50%, #f0f2f7 100%);
+    --gradient-hero-light: linear-gradient(180deg, #f8f9fc 0%, #fefefe 50%, #f0f2f7 100%);
     --gradient-mesh-light:
         radial-gradient(at 0% 0%, rgba(234,139,56,0.12) 0px, transparent 50%),
         radial-gradient(at 100% 0%, rgba(116,124,173,0.15) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(223,240,222,0.4) 0px, transparent 50%),
         radial-gradient(at 0% 100%, rgba(255,193,186,0.15) 0px, transparent 50%);
-    --gradient-card-light: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,249,252,0.8) 100%);
 
-    /* Shadows Light Mode */
-    --shadow-light-sm: 0 2px 8px rgba(116,124,173,0.08);
-    --shadow-light-md: 0 4px 20px rgba(116,124,173,0.12);
-    --shadow-light-lg: 0 8px 40px rgba(116,124,173,0.15);
-    --shadow-light-xl: 0 20px 60px rgba(116,124,173,0.18);
-    --shadow-glow-light: 0 0 40px rgba(234,139,56,0.2);
+    --shadow-sm: 0 2px 8px rgba(116,124,173,0.08);
+    --shadow-md: 0 4px 20px rgba(116,124,173,0.1);
+    --shadow-lg: 0 12px 40px rgba(116,124,173,0.14);
 }
 
-/* Theme Toggle Light Mode State */
+/* Theme Toggle Light State */
 [data-theme="light"] .theme-toggle {
     background: linear-gradient(135deg, #87ceeb 0%, #b4e4ff 100%);
     border-color: rgba(234,139,56,0.3);
@@ -124,10 +112,7 @@
 [data-theme="light"] .theme-toggle::before {
     transform: translateX(26px);
     background: linear-gradient(135deg, #ffd43b 0%, #ffec99 100%);
-    box-shadow:
-        0 0 15px rgba(255,212,59,0.6),
-        0 0 30px rgba(255,212,59,0.4),
-        inset -3px -3px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 15px rgba(255,212,59,0.6), 0 0 30px rgba(255,212,59,0.4);
 }
 
 [data-theme="light"] .theme-toggle .sun-icon {
@@ -135,16 +120,9 @@
     transform: translateY(-50%) scale(1) rotate(0deg);
 }
 
-[data-theme="light"] .theme-toggle .moon-icon {
-    opacity: 0;
-    transform: translateY(-50%) translateX(10px);
-}
+[data-theme="light"] .theme-toggle .moon-icon { opacity: 0; }
+[data-theme="light"] .theme-toggle .star { opacity: 0; }
 
-[data-theme="light"] .theme-toggle .star {
-    opacity: 0;
-}
-
-/* Clouds effect in light mode */
 [data-theme="light"] .theme-toggle::after {
     content: '';
     position: absolute;
@@ -154,9 +132,7 @@
     height: 6px;
     background: white;
     border-radius: 10px;
-    box-shadow:
-        5px -2px 0 white,
-        -5px 0 0 white;
+    box-shadow: 5px -2px 0 white, -5px 0 0 white;
     opacity: 0.8;
     animation: floatCloud 3s ease-in-out infinite;
 }
@@ -167,15 +143,67 @@
 }
 
 /* ============================================
-   LIGHT MODE BODY & BACKGROUNDS
+   LIGHT BODY
 ============================================ */
 [data-theme="light"] body {
     background: var(--bg-primary);
     color: var(--text-primary);
 }
 
+/* ============================================
+   LIGHT HEADER
+============================================ */
+[data-theme="light"] .header::before {
+    background: rgba(254,254,254, 0);
+}
+
+[data-theme="light"] .header.scrolled::before {
+    background: rgba(254,254,254, 0.85);
+}
+
+[data-theme="light"] .header.scrolled {
+    border-bottom-color: var(--border-light);
+}
+
+[data-theme="light"] .nav-menu {
+    background: var(--bg-glass);
+    border-color: var(--border-light);
+}
+
+[data-theme="light"] .nav-link {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(116,124,173,0.08);
+}
+
+[data-theme="light"] .nav-link.active {
+    color: var(--white);
+    background: var(--gradient-brand);
+}
+
+[data-theme="light"] .btn-nav {
+    background: var(--text-primary);
+    color: var(--white);
+}
+
+[data-theme="light"] .btn-nav:hover {
+    background: var(--text-secondary);
+}
+
+[data-theme="light"] .menu-toggle {
+    background: rgba(116,124,173,0.08);
+    border-color: var(--border-light);
+    color: var(--text-primary);
+}
+
+/* ============================================
+   LIGHT HERO
+============================================ */
 [data-theme="light"] .hero {
-    background: var(--gradient-hero);
+    background: var(--gradient-hero-light);
 }
 
 [data-theme="light"] .hero-bg::before {
@@ -189,69 +217,9 @@
         linear-gradient(90deg, rgba(116,124,173,0.06) 1px, transparent 1px);
 }
 
-
-/* ============================================
-   LIGHT MODE HEADER
-============================================ */
-[data-theme="light"] .header::before {
-    background: rgba(254, 254, 254, 0);
-}
-
-[data-theme="light"] .header.scrolled::before {
-    background: rgba(254, 254, 254, 0.85);
-    backdrop-filter: blur(20px);
-}
-
-[data-theme="light"] .header.scrolled {
-    border-bottom: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .nav-menu {
+[data-theme="light"] .hero-badge {
     background: var(--bg-glass);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .nav-link {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .nav-link:hover {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .nav-link.active {
-    color: var(--white);
-    background: var(--gradient-brand);
-}
-
-[data-theme="light"] .btn-icon {
-    background: rgba(116,124,173,0.08);
-    border: 1px solid var(--border-primary);
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .btn-icon:hover {
-    background: rgba(116,124,173,0.15);
-    color: var(--brand-orange);
-}
-
-[data-theme="light"] .menu-toggle {
-    background: rgba(116,124,173,0.08);
-    border: 1px solid var(--border-primary);
-    color: var(--text-primary);
-}
-
-/* ============================================
-   LIGHT MODE HERO TEXT
-============================================ */
-[data-theme="light"] .hero-status {
-    background: var(--bg-glass);
-    border: 1px solid var(--border-primary);
-    box-shadow: var(--shadow-light-sm);
-}
-
-[data-theme="light"] .status-text {
+    border-color: var(--border-light);
     color: var(--text-secondary);
 }
 
@@ -263,20 +231,20 @@
     color: var(--text-secondary);
 }
 
-[data-theme="light"] .hero-stats {
-    border-top: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .hero-stat-value {
+[data-theme="light"] .hero-metric-value {
     color: var(--text-primary);
 }
 
-[data-theme="light"] .hero-stat-label {
+[data-theme="light"] .hero-metric-label {
     color: var(--text-tertiary);
 }
 
+[data-theme="light"] .hero-metric-sep {
+    background: var(--border-light);
+}
+
 /* ============================================
-   LIGHT MODE BUTTONS
+   LIGHT BUTTONS
 ============================================ */
 [data-theme="light"] .btn-primary {
     background: var(--text-primary);
@@ -285,138 +253,112 @@
 
 [data-theme="light"] .btn-primary:hover {
     background: var(--text-secondary);
+    box-shadow: 0 8px 24px rgba(26,26,46,0.2);
 }
 
 [data-theme="light"] .btn-secondary {
-    background: var(--bg-glass);
     color: var(--text-primary);
-    border: 1px solid var(--border-primary);
+    border-color: var(--border-light);
+    background: var(--bg-glass);
 }
 
 [data-theme="light"] .btn-secondary:hover {
     background: rgba(116,124,173,0.1);
-    border-color: var(--brand-lavender);
-}
-
-[data-theme="light"] .btn-nav {
-    background: var(--text-primary);
-    color: var(--white);
-}
-
-[data-theme="light"] .btn-nav:hover {
-    background: var(--text-secondary);
+    border-color: var(--border-light);
 }
 
 /* ============================================
-   LIGHT MODE CARDS & CONTAINERS
+   LIGHT SECTIONS COMMON
 ============================================ */
-[data-theme="light"] .preview-card {
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow:
-        0 25px 50px -12px rgba(0,0,0,0.1),
-        inset 0 1px 0 rgba(255,255,255,0.8);
-}
-
-[data-theme="light"] .hero-visual:hover .preview-card {
-    background: rgba(255,255,255,0.85);
-    border-color: rgba(0,0,0,0.1);
-    box-shadow:
-        0 32px 64px -16px rgba(0,0,0,0.15),
-        inset 0 1px 0 rgba(255,255,255,0.9),
-        0 0 0 1px rgba(0,0,0,0.03);
-}
-
-[data-theme="light"] .preview-card::before {
-    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, transparent 100%);
-}
-
-[data-theme="light"] .preview-chrome {
-    border-bottom: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .preview-url {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-secondary);
-}
-
-[data-theme="light"] .preview-url-text {
-    color: var(--text-tertiary);
-}
-
-
-/* ============================================
-   LIGHT MODE SECTIONS
-============================================ */
-[data-theme="light"] .section-dark {
-    background: var(--bg-secondary);
-}
-
-[data-theme="light"] .bento-item {
-    background: var(--gradient-card-light);
-    border: 1px solid var(--border-primary);
-    box-shadow: var(--shadow-light-md);
-}
-
-[data-theme="light"] .bento-item:hover {
-    border-color: rgba(234,139,56,0.3);
-    box-shadow: var(--shadow-light-lg);
-}
-
-[data-theme="light"] .bento-title {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .bento-description {
-    color: var(--text-secondary);
-}
-
 [data-theme="light"] .section-title {
     color: var(--text-primary);
 }
 
-[data-theme="light"] .section-subtitle {
+[data-theme="light"] .section-desc {
     color: var(--text-secondary);
 }
 
-[data-theme="light"] .section-header::after {
-    background: linear-gradient(90deg, transparent, var(--border-primary), transparent);
+[data-theme="light"] .section-badge {
+    background: rgba(234,139,56,0.08);
 }
 
 /* ============================================
-   LIGHT MODE SHOWCASE
+   LIGHT SERVICES
 ============================================ */
-[data-theme="light"] .showcase-item {
-    background: var(--gradient-card-light);
-    border: 1px solid var(--border-primary);
-    box-shadow: var(--shadow-light-lg);
+[data-theme="light"] .services {
+    background: var(--bg-primary);
 }
 
-[data-theme="light"] .showcase-overlay {
-    background: linear-gradient(180deg, transparent 0%, rgba(26,26,46,0.95) 100%);
+[data-theme="light"] .service-card {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    box-shadow: var(--shadow-sm);
 }
 
-[data-theme="light"] .showcase-info h3 {
-    color: var(--white);
+[data-theme="light"] .service-card:hover {
+    border-color: rgba(234,139,56,0.2);
+    box-shadow: var(--shadow-md);
+}
+
+[data-theme="light"] .service-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .service-text {
+    color: var(--text-secondary);
 }
 
 /* ============================================
-   LIGHT MODE TESTIMONIALS
+   LIGHT PORTFOLIO
+============================================ */
+[data-theme="light"] .portfolio {
+    background: var(--bg-secondary);
+}
+
+[data-theme="light"] .portfolio-card {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .portfolio-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-light);
+}
+
+[data-theme="light"] .portfolio-info h3 {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .portfolio-info p {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .portfolio-tech span {
+    background: var(--bg-secondary);
+    border-color: var(--border-light);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .portfolio-tag {
+    background: rgba(26,26,46,0.7);
+}
+
+/* ============================================
+   LIGHT TESTIMONIALS
 ============================================ */
 [data-theme="light"] .testimonials {
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
 }
 
 [data-theme="light"] .testimonial-card {
     background: var(--bg-card);
-    border: 1px solid var(--border-primary);
-    box-shadow: var(--shadow-light-md);
+    border-color: var(--border-light);
+    box-shadow: var(--shadow-sm);
 }
 
 [data-theme="light"] .testimonial-card:hover {
-    box-shadow: var(--shadow-light-lg);
+    box-shadow: var(--shadow-md);
     border-color: rgba(234,139,56,0.2);
 }
 
@@ -424,250 +366,6 @@
     color: var(--text-secondary);
 }
 
-[data-theme="light"] .testimonial-author h4 {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .testimonial-author span {
-    color: var(--text-tertiary);
-}
-
-/* ============================================
-   LIGHT MODE CONTACT
-============================================ */
-[data-theme="light"] .contact {
-    background: var(--bg-primary);
-}
-
-[data-theme="light"] .contact-info {
-    background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-green-light) 100%);
-}
-
-[data-theme="light"] .contact-form-wrapper {
-    background: var(--bg-card);
-    border: 1px solid var(--border-primary);
-    box-shadow: var(--shadow-light-xl);
-}
-
-[data-theme="light"] .form-group input,
-[data-theme="light"] .form-group select,
-[data-theme="light"] .form-group textarea {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-primary);
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .form-group input:focus,
-[data-theme="light"] .form-group select:focus,
-[data-theme="light"] .form-group textarea:focus {
-    border-color: var(--brand-orange);
-    background: var(--bg-card);
-    box-shadow: 0 0 0 3px rgba(234,139,56,0.1);
-}
-
-[data-theme="light"] .form-group label {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .form-group input::placeholder,
-[data-theme="light"] .form-group textarea::placeholder {
-    color: var(--text-muted);
-}
-
-/* ============================================
-   LIGHT MODE FOOTER
-============================================ */
-[data-theme="light"] .footer {
-    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-}
-
-[data-theme="light"] .footer::before {
-    background: var(--gradient-mesh-light);
-    opacity: 0.5;
-}
-
-[data-theme="light"] .footer-brand p {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .footer-social a {
-    background: rgba(116,124,173,0.1);
-    border: 1px solid var(--border-primary);
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .footer-social a:hover {
-    background: var(--brand-orange);
-    border-color: var(--brand-orange);
-    color: var(--white);
-}
-
-[data-theme="light"] .footer-links h4 {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .footer-links li a {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .footer-links li a:hover {
-    color: var(--brand-orange);
-}
-
-[data-theme="light"] .footer-contact-item span {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .footer-contact-item a {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .footer-bottom {
-    border-top: 1px solid var(--border-primary);
-    color: var(--text-tertiary);
-}
-
-[data-theme="light"] .footer-legal a:hover {
-    color: var(--text-primary);
-}
-
-/* ============================================
-   LIGHT MODE SCROLLBAR
-============================================ */
-[data-theme="light"] ::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
-}
-
-[data-theme="light"] ::-webkit-scrollbar-thumb {
-    background: var(--brand-lavender);
-    opacity: 0.5;
-}
-
-[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-    background: var(--brand-orange);
-}
-
-
-/* ============================================
-   LIGHT MODE BENTO ELEMENTS
-============================================ */
-[data-theme="light"] .bento-icon {
-    background: rgba(234,139,56,0.1);
-    color: var(--brand-orange);
-}
-
-[data-theme="light"] .bento-item:hover .bento-icon {
-    background: var(--gradient-brand);
-    color: var(--white);
-}
-
-[data-theme="light"] .bento-text {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .bento-link {
-    color: var(--brand-orange);
-}
-
-[data-theme="light"] .bento-featured {
-    background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-green-light) 100%);
-}
-
-[data-theme="light"] .bento-featured .bento-icon {
-    background: rgba(255,255,255,0.15);
-    color: var(--white);
-}
-
-[data-theme="light"] .bento-featured .bento-title {
-    color: var(--white);
-}
-
-[data-theme="light"] .bento-featured .bento-text {
-    color: rgba(255,255,255,0.8);
-}
-
-[data-theme="light"] .bento-tech {
-    background: var(--bg-secondary);
-}
-
-/* ============================================
-   LIGHT MODE TECH BADGES
-============================================ */
-[data-theme="light"] .tech-stack {
-    background: transparent;
-}
-
-[data-theme="light"] .tech-badge {
-    background: var(--bg-card);
-    border: 1px solid var(--border-primary);
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .tech-badge:hover {
-    background: rgba(234,139,56,0.1);
-    border-color: var(--brand-orange);
-    color: var(--brand-orange);
-}
-
-[data-theme="light"] .tech-badge i {
-    color: var(--brand-lavender);
-}
-
-/* ============================================
-   LIGHT MODE FEATURE ITEMS
-============================================ */
-[data-theme="light"] .feature-list {
-    background: transparent;
-}
-
-[data-theme="light"] .feature-item {
-    background: var(--bg-card);
-    border: 1px solid var(--border-primary);
-    box-shadow: var(--shadow-light-sm);
-}
-
-[data-theme="light"] .feature-item:hover {
-    background: var(--bg-card);
-    border-color: var(--brand-orange);
-    box-shadow: var(--shadow-light-md);
-}
-
-[data-theme="light"] .feature-icon {
-    background: rgba(234,139,56,0.1);
-    color: var(--brand-orange);
-}
-
-[data-theme="light"] .feature-content h4 {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .feature-content p {
-    color: var(--text-secondary);
-}
-
-/* ============================================
-   LIGHT MODE SHOWCASE SECTION
-============================================ */
-[data-theme="light"] .showcase {
-    background: var(--bg-primary);
-}
-
-[data-theme="light"] .showcase::before {
-    background: var(--gradient-mesh-light);
-    opacity: 0.5;
-}
-
-[data-theme="light"] .showcase-content .section-title {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .showcase-content .section-subtitle {
-    color: var(--text-secondary);
-}
-
-/* ============================================
-   LIGHT MODE TESTIMONIAL DETAILS
-============================================ */
 [data-theme="light"] .testimonial-name {
     color: var(--text-primary);
 }
@@ -676,34 +374,38 @@
     color: var(--text-tertiary);
 }
 
-[data-theme="light"] .testimonial-avatar {
-    border: 2px solid var(--border-primary);
+[data-theme="light"] .testimonial-author {
+    border-top-color: var(--border-light);
 }
 
-[data-theme="light"] .testimonial-card:nth-child(2) {
+[data-theme="light"] .testimonial-card--featured {
     background: var(--gradient-brand);
+    border-color: transparent;
 }
 
-[data-theme="light"] .testimonial-card:nth-child(2) .testimonial-text,
-[data-theme="light"] .testimonial-card:nth-child(2) .testimonial-name,
-[data-theme="light"] .testimonial-card:nth-child(2) .testimonial-role {
+[data-theme="light"] .testimonial-card--featured .testimonial-text,
+[data-theme="light"] .testimonial-card--featured .testimonial-name {
     color: var(--white);
 }
 
-[data-theme="light"] .testimonial-card:nth-child(2) .testimonial-role {
+[data-theme="light"] .testimonial-card--featured .testimonial-role {
     color: rgba(255,255,255,0.8);
 }
 
+[data-theme="light"] .testimonial-card--featured .testimonial-author {
+    border-top-color: rgba(255,255,255,0.2);
+}
+
 /* ============================================
-   LIGHT MODE CTA SECTION
+   LIGHT CTA
 ============================================ */
 [data-theme="light"] .cta {
     background: var(--bg-secondary);
 }
 
-[data-theme="light"] .cta::before {
-    background: var(--gradient-mesh-light);
-    opacity: 0.5;
+[data-theme="light"] .cta-inner {
+    background: linear-gradient(145deg, rgba(234,139,56,0.08) 0%, rgba(255,107,53,0.03) 100%);
+    border-color: rgba(234,139,56,0.15);
 }
 
 [data-theme="light"] .cta-title {
@@ -715,121 +417,119 @@
 }
 
 /* ============================================
-   LIGHT MODE FOOTER DETAILS
+   LIGHT CONTACT
 ============================================ */
-[data-theme="light"] .footer-section h4 {
+[data-theme="light"] .contact {
+    background: var(--bg-primary);
+}
+
+[data-theme="light"] .contact-info {
+    background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-green-light) 100%);
+}
+
+[data-theme="light"] .contact-form-wrapper {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    box-shadow: var(--shadow-md);
+}
+
+[data-theme="light"] .form-group label {
     color: var(--text-primary);
 }
 
-[data-theme="light"] .footer-links li a {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .footer-links li a:hover {
-    color: var(--brand-orange);
-}
-
-[data-theme="light"] .footer-copyright {
-    color: var(--text-tertiary);
-}
-
-/* ============================================
-   LIGHT MODE PREVIEW CARD ELEMENTS
-============================================ */
-[data-theme="light"] .preview-panel {
-    background: rgba(116,124,173,0.05);
-    border: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .panel-title {
-    color: var(--text-secondary);
-}
-
-[data-theme="light"] .panel-value {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .server-stats {
-    background: transparent;
-}
-
-[data-theme="light"] .server-stat {
-    background: rgba(116,124,173,0.05);
-    border: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .server-stat-value {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .server-stat-label {
-    color: var(--text-tertiary);
-}
-
-[data-theme="light"] .code-preview {
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea {
     background: var(--bg-secondary);
-    border: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .code-header {
-    border-bottom: 1px solid var(--border-primary);
-}
-
-[data-theme="light"] .code-tab {
-    color: var(--text-tertiary);
-}
-
-[data-theme="light"] .code-tab.active {
-    background: rgba(116,124,173,0.1);
+    border-color: var(--border-light);
     color: var(--text-primary);
 }
 
-[data-theme="light"] .code-block {
-    color: var(--text-secondary);
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group textarea:focus {
+    border-color: var(--brand-orange);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 3px rgba(234,139,56,0.1);
 }
 
-[data-theme="light"] .code-line-number {
+[data-theme="light"] .form-group input::placeholder,
+[data-theme="light"] .form-group textarea::placeholder {
     color: var(--text-muted);
 }
 
-[data-theme="light"] .code-comment {
-    color: var(--text-muted);
+/* ============================================
+   LIGHT FOOTER
+============================================ */
+[data-theme="light"] .footer {
+    background: var(--bg-secondary);
+    border-top-color: var(--border-light);
 }
 
-[data-theme="light"] .preview-action {
-    background: rgba(116,124,173,0.1);
+[data-theme="light"] .footer-brand p {
     color: var(--text-secondary);
 }
 
-[data-theme="light"] .preview-action:hover {
-    background: rgba(116,124,173,0.2);
+[data-theme="light"] .footer-col h4 {
     color: var(--text-primary);
 }
 
+[data-theme="light"] .footer-links a,
+[data-theme="light"] .footer-links span {
+    color: var(--text-secondary);
+}
 
-/* ============================================
-   LIGHT MODE SECTION HEADERS
-============================================ */
-[data-theme="light"] .section-badge {
-    background: rgba(234,139,56,0.1);
+[data-theme="light"] .footer-links a:hover {
     color: var(--brand-orange);
 }
 
-[data-theme="light"] .services-section,
-[data-theme="light"] .section-dark {
+[data-theme="light"] .footer-social a {
+    background: rgba(116,124,173,0.08);
+    border-color: var(--border-light);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .footer-social a:hover {
+    background: var(--brand-orange);
+    border-color: var(--brand-orange);
+    color: var(--white);
+}
+
+[data-theme="light"] .footer-bottom {
+    border-top-color: var(--border-light);
+    color: var(--text-tertiary);
+}
+
+[data-theme="light"] .footer-legal a {
+    color: var(--text-tertiary);
+}
+
+[data-theme="light"] .footer-legal a:hover {
+    color: var(--text-primary);
+}
+
+/* ============================================
+   LIGHT SCROLLBAR
+============================================ */
+[data-theme="light"] ::-webkit-scrollbar-track {
     background: var(--bg-secondary);
 }
 
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: var(--brand-lavender);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-orange);
+}
 
 /* ============================================
-   LIGHT MODE SCROLL INDICATOR
+   LIGHT SCROLL INDICATOR
 ============================================ */
 [data-theme="light"] .scroll-indicator {
     color: var(--text-tertiary);
 }
 
 [data-theme="light"] .scroll-mouse {
-    border-color: var(--border-primary);
+    border-color: var(--border-light);
 }
 
 [data-theme="light"] .scroll-mouse::after {
@@ -837,61 +537,21 @@
 }
 
 /* ============================================
-   LIGHT MODE TRUSTED SECTION
-============================================ */
-[data-theme="light"] .trusted {
-    background: var(--bg-primary);
-    border-color: var(--border-primary);
-}
-
-[data-theme="light"] .trusted-label {
-    color: var(--text-tertiary);
-}
-
-[data-theme="light"] .trusted-logo {
-    color: var(--text-muted);
-}
-
-[data-theme="light"] .trusted-logo:hover {
-    color: var(--text-secondary);
-}
-
-/* ============================================
-   LIGHT MODE SERVICES SECTION
-============================================ */
-[data-theme="light"] .services {
-    background: var(--bg-primary);
-}
-
-[data-theme="light"] .services::before {
-    background: var(--gradient-mesh-light);
-    opacity: 0.5;
-}
-
-/* ============================================
-   LIGHT MODE FORM LABEL
-============================================ */
-[data-theme="light"] .form-group label {
-    color: var(--text-primary);
-}
-
-/* ============================================
-   LIGHT MODE MOBILE NAV
+   LIGHT MOBILE NAV
 ============================================ */
 @media (max-width: 768px) {
     [data-theme="light"] .nav-menu {
         background: rgba(255,255,255,0.98);
-        border: 1px solid rgba(0,0,0,0.1);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        border-color: rgba(0,0,0,0.1);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.12);
     }
 
-    [data-theme="light"] .nav-menu .nav-link {
-        color: var(--text-primary, #1a1a2e);
+    [data-theme="light"] .nav-link {
+        color: var(--text-primary);
     }
 
-    [data-theme="light"] .nav-menu .nav-link:hover {
-        background: rgba(234,139,56,0.1);
+    [data-theme="light"] .nav-link:hover {
+        background: rgba(234,139,56,0.08);
         color: var(--brand-orange);
     }
 }
-

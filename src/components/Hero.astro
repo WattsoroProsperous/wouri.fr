@@ -1,156 +1,50 @@
 <!-- Hero Section -->
 <section id="hero" class="hero">
-    <!-- Background -->
     <div class="hero-bg">
         <div class="hero-grid"></div>
     </div>
 
     <div class="container">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title animate-on-scroll">
-                    <span class="line">Nous construisons</span>
-                    <span class="line">
-                        <span class="highlight">
-                            <span class="highlight-text">l'avenir digital</span>
-                        </span>
-                    </span>
-                </h1>
+        <div class="hero-inner">
+            <span class="hero-badge animate-on-scroll">
+                <span class="hero-badge-dot"></span>
+                Disponible pour nouveaux projets
+            </span>
 
-                <p class="hero-description animate-on-scroll">
-                    Solutions technologiques sur mesure qui transforment vos ambitions en realites numeriques. Code. Deploy. Scale.
-                </p>
+            <h1 class="hero-title animate-on-scroll">
+                Nous concevons des<br>
+                <span class="hero-title-gradient">solutions digitales</span>
+                qui performent
+            </h1>
 
-                <div class="hero-buttons animate-on-scroll">
-                    <a href="#contact" class="btn btn-primary">
-                        <span>Lancer votre projet</span>
-                        <i class="fas fa-arrow-right btn-icon-right"></i>
-                    </a>
-                    <a href="#showcase" class="btn btn-secondary">
-                        <span>Voir nos realisations</span>
-                    </a>
-                </div>
+            <p class="hero-description animate-on-scroll">
+                Studio d'ingenierie logicielle base a Paris. Nous transformons vos idees en produits numeriques robustes, scalables et elegants.
+            </p>
 
-                <div class="hero-stats stagger-children">
-                    <div class="hero-stat">
-                        <div class="hero-stat-value counter-animate" data-target="200" data-suffix="+">0</div>
-                        <div class="hero-stat-label">Projets deployes</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value">99.9<span>%</span></div>
-                        <div class="hero-stat-label">Uptime garanti</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value counter-animate" data-target="10" data-suffix="+">0</div>
-                        <div class="hero-stat-label">Annees d'expertise</div>
-                    </div>
-                </div>
+            <div class="hero-buttons animate-on-scroll">
+                <a href="#contact" class="btn btn-primary">
+                    Demarrer un projet
+                    <i class="fas fa-arrow-right btn-icon-right"></i>
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    Decouvrir nos services
+                </a>
             </div>
 
-            <div class="hero-visual animate-on-scroll">
-                <div class="preview-container">
-                    <div class="preview-card">
-                        <!-- Browser Chrome -->
-                        <div class="preview-chrome">
-                            <div class="preview-dots">
-                                <span class="preview-dot"></span>
-                                <span class="preview-dot"></span>
-                                <span class="preview-dot"></span>
-                            </div>
-                            <div class="preview-url">
-                                <i class="fas fa-lock"></i>
-                                <span>dashboard.wouri.dev</span>
-                            </div>
-                            <div class="preview-actions">
-                                <button class="preview-action"><i class="fas fa-minus"></i></button>
-                                <button class="preview-action"><i class="fas fa-expand"></i></button>
-                            </div>
-                        </div>
-
-                        <!-- Dashboard Content -->
-                        <div class="preview-content">
-                            <div class="preview-panel">
-                                <div class="panel-header">
-                                    <span class="panel-title">CPU Usage</span>
-                                    <span class="panel-badge"><i class="fas fa-circle"></i> Live</span>
-                                </div>
-                                <div class="panel-value">23%</div>
-                                <div class="panel-change"><i class="fas fa-arrow-down"></i> -5.2%</div>
-                            </div>
-
-                            <div class="preview-panel">
-                                <div class="panel-header">
-                                    <span class="panel-title">Memory</span>
-                                    <span class="panel-badge"><i class="fas fa-circle"></i> Live</span>
-                                </div>
-                                <div class="panel-value">4.2 GB</div>
-                                <div class="panel-change"><i class="fas fa-arrow-up"></i> +1.8%</div>
-                            </div>
-
-                            <div class="server-stats">
-                                <div class="server-stat">
-                                    <div class="server-stat-icon"><i class="fas fa-globe"></i></div>
-                                    <div class="server-stat-value">24</div>
-                                    <div class="server-stat-label">Regions</div>
-                                </div>
-                                <div class="server-stat">
-                                    <div class="server-stat-icon"><i class="fas fa-server"></i></div>
-                                    <div class="server-stat-value">156</div>
-                                    <div class="server-stat-label">Instances</div>
-                                </div>
-                                <div class="server-stat">
-                                    <div class="server-stat-icon"><i class="fas fa-database"></i></div>
-                                    <div class="server-stat-value">42TB</div>
-                                    <div class="server-stat-label">Data</div>
-                                </div>
-                                <div class="server-stat">
-                                    <div class="server-stat-icon"><i class="fas fa-shield-alt"></i></div>
-                                    <div class="server-stat-value">100%</div>
-                                    <div class="server-stat-label">Secure</div>
-                                </div>
-                            </div>
-
-                            <div class="code-preview">
-                                <div class="code-header">
-                                    <div class="code-tabs">
-                                        <span class="code-tab active">deploy.ts</span>
-                                        <span class="code-tab">config.yaml</span>
-                                        <span class="code-tab">docker</span>
-                                    </div>
-                                </div>
-                                <div class="code-block">
-                                    <div class="code-line">
-                                        <span class="code-line-number">1</span>
-                                        <span><span class="code-keyword">import</span> {'{'} <span class="code-variable">deploy</span> {'}'} <span class="code-keyword">from</span> <span class="code-string">'@wouri/cloud'</span>;</span>
-                                    </div>
-                                    <div class="code-line">
-                                        <span class="code-line-number">2</span>
-                                        <span></span>
-                                    </div>
-                                    <div class="code-line">
-                                        <span class="code-line-number">3</span>
-                                        <span><span class="code-keyword">await</span> <span class="code-function">deploy</span>({'{'})</span>
-                                    </div>
-                                    <div class="code-line">
-                                        <span class="code-line-number">4</span>
-                                        <span>  <span class="code-variable">region</span>: <span class="code-string">'eu-west-3'</span>,</span>
-                                    </div>
-                                    <div class="code-line">
-                                        <span class="code-line-number">5</span>
-                                        <span>  <span class="code-variable">instances</span>: <span class="code-string">3</span>,</span>
-                                    </div>
-                                    <div class="code-line">
-                                        <span class="code-line-number">6</span>
-                                        <span>  <span class="code-variable">autoScale</span>: <span class="code-keyword">true</span></span>
-                                    </div>
-                                    <div class="code-line">
-                                        <span class="code-line-number">7</span>
-                                        <span>{'}'});</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="hero-metrics stagger-children">
+                <div class="hero-metric">
+                    <span class="hero-metric-value counter-animate" data-target="200" data-suffix="+">0</span>
+                    <span class="hero-metric-label">Projets livres</span>
+                </div>
+                <div class="hero-metric-sep"></div>
+                <div class="hero-metric">
+                    <span class="hero-metric-value">99.9<span class="accent">%</span></span>
+                    <span class="hero-metric-label">Uptime</span>
+                </div>
+                <div class="hero-metric-sep"></div>
+                <div class="hero-metric">
+                    <span class="hero-metric-value counter-animate" data-target="10" data-suffix=" ans">0</span>
+                    <span class="hero-metric-label">D'experience</span>
                 </div>
             </div>
         </div>
@@ -158,6 +52,5 @@
 
     <div class="scroll-indicator animate-on-scroll">
         <div class="scroll-mouse"></div>
-        <span>Scroll</span>
     </div>
 </section>

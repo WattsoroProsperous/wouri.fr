@@ -2,36 +2,34 @@
 <section id="contact" class="contact">
     <div class="container">
         <div class="section-header animate-on-scroll">
-            <span class="section-badge"><i class="fas fa-envelope"></i> CONTACT</span>
+            <span class="section-badge"><i class="fas fa-envelope"></i> Contact</span>
             <h2 class="section-title">Parlons de votre projet</h2>
-            <p class="section-description">
-                Notre equipe est prete a vous accompagner dans votre transformation digitale.
-            </p>
+            <p class="section-desc">Notre equipe repond sous 24h.</p>
         </div>
 
         <div class="contact-grid">
             <div class="contact-info animate-on-scroll">
-                <h3>Let's build together</h3>
-                <p>Que vous ayez un projet en tete ou besoin de conseils, nous sommes la pour vous aider a reussir.</p>
+                <h3>Contactez-nous</h3>
+                <p>Que vous ayez un projet precis ou besoin de conseils, nous sommes la.</p>
 
                 <div class="contact-details">
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
-                        <div class="contact-item-content">
+                        <div>
                             <span>Telephone</span>
                             <a href="tel:+33646870856">+33 6 46 87 08 56</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
-                        <div class="contact-item-content">
+                        <div>
                             <span>Email</span>
                             <a href="mailto:contact@wouri.fr">contact@wouri.fr</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="contact-item-content">
+                        <div>
                             <span>Adresse</span>
                             <p>60 rue Francois 1er, 75008 Paris</p>
                         </div>
@@ -42,7 +40,6 @@
                     <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
                 </div>
             </div>
 
@@ -67,7 +64,7 @@
                         <textarea id="message" name="message" placeholder="Decrivez votre projet..." required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">
-                        <span>Envoyer</span>
+                        Envoyer le message
                         <i class="fas fa-paper-plane btn-icon-right"></i>
                     </button>
                 </form>
@@ -81,7 +78,7 @@
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Message envoye ! Nous vous contacterons bientot.');
+            alert('Message envoye ! Nous vous contacterons sous 24h.');
             contactForm.reset();
         });
     }
