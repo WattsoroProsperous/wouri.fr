@@ -1,0 +1,66 @@
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="/logos/logo-dark.png" alt="Wouri" class="logo-img footer-logo-dark">
+                <img src="/logos/logo-light.png" alt="Wouri" class="logo-img footer-logo-light" style="display: none;">
+                <p>Studio d'innovation digitale base a Paris. Nous construisons des solutions technologiques qui font la difference.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#showcase">Portfolio</a></li>
+                    <li><a href="#testimonials">Temoignages</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Ingenierie Logicielle</a></li>
+                    <li><a href="#">Cloud & DevOps</a></li>
+                    <li><a href="#">Cybersecurite</a></li>
+                    <li><a href="#">Design UI/UX</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <div class="footer-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>60 rue Francois 1er, 75008 Paris</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+33646870856">+33 6 46 87 08 56</a>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:contact@wouri.fr">contact@wouri.fr</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="currentYear"></span> Wouri. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Mentions legales</a>
+                <a href="#">Politique de confidentialite</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script is:inline>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>

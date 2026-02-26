@@ -1,0 +1,55 @@
+<!-- Global Scripts — Minimal -->
+<script is:inline>
+    // Scroll animations with IntersectionObserver
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -80px 0px',
+        threshold: 0.1
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+
+                // Animate counters
+                if (entry.target.classList.contains('counter-animate')) {
+                    animateCounter(entry.target);
+                }
+
+                // Stagger children animation
+                if (entry.target.classList.contains('stagger-children')) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.classList.add('visible');
+                        }, index * 80);
+                    });
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll, .stagger-children, .counter-animate').forEach(el => {
+        animationObserver.observe(el);
+    });
+
+    // Counter animation
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target')) || 0;
+        const duration = 1500;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                element.textContent = Math.floor(current) + (element.getAttribute('data-suffix') || '');
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target + (element.getAttribute('data-suffix') || '');
+            }
+        };
+        updateCounter();
+    }
+</script>

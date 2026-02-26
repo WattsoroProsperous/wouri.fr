@@ -1,0 +1,333 @@
+<!DOCTYPE html><html lang="fr"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Wouri - Digital Innovation Studio | Paris</title><meta name="description" content="Wouri - Studio d'innovation digitale à Paris. Ingénierie logicielle, solutions cloud et transformation digitale."><!-- Preconnect for performance --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://images.unsplash.com"><!-- Modern Fonts --><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"><!-- Font Awesome --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="/_astro/index.DVHggnNy.css"></head> <body> <!-- Theme Transition Overlay --> <div class="theme-transition-overlay" id="themeOverlay"></div>  <!-- Cookie Consent Banner --><div class="cookie-banner" id="cookieBanner"> <div class="cookie-banner-content"> <div class="cookie-text"> <h4><i class="fas fa-cookie-bite"></i> Nous utilisons des cookies</h4> <p>Nous utilisons des cookies pour ameliorer votre experience, analyser le trafic et personnaliser le contenu. En continuant, vous acceptez notre <a href="#politique">politique de confidentialite</a>.</p> </div> <div class="cookie-buttons"> <button class="cookie-btn cookie-btn-accept" id="cookieAcceptAll">Tout accepter</button> <button class="cookie-btn cookie-btn-settings" id="cookieSettings">Parametres</button> <button class="cookie-btn cookie-btn-reject" id="cookieReject">Refuser</button> </div> </div> </div> <!-- Cookie Settings Modal --> <div class="cookie-modal" id="cookieModal"> <div class="cookie-modal-content"> <div class="cookie-modal-header"> <h3>Parametres des cookies</h3> <p>Gerez vos preferences de cookies. Certains cookies sont necessaires au fonctionnement du site.</p> </div> <div class="cookie-modal-body"> <div class="cookie-option"> <div class="cookie-option-info"> <h5>Cookies essentiels</h5> <p>Necessaires au fonctionnement du site. Ils ne peuvent pas etre desactives.</p> </div> <label class="cookie-toggle"> <input type="checkbox" checked disabled> <span class="cookie-toggle-slider"></span> </label> </div> <div class="cookie-option"> <div class="cookie-option-info"> <h5>Cookies analytiques</h5> <p>Nous aident a comprendre comment les visiteurs interagissent avec le site.</p> </div> <label class="cookie-toggle"> <input type="checkbox" id="cookieAnalytics"> <span class="cookie-toggle-slider"></span> </label> </div> <div class="cookie-option"> <div class="cookie-option-info"> <h5>Cookies marketing</h5> <p>Utilises pour suivre les visiteurs et afficher des publicites pertinentes.</p> </div> <label class="cookie-toggle"> <input type="checkbox" id="cookieMarketing"> <span class="cookie-toggle-slider"></span> </label> </div> <div class="cookie-option"> <div class="cookie-option-info"> <h5>Cookies de preferences</h5> <p>Permettent de memoriser vos choix et personnaliser votre experience.</p> </div> <label class="cookie-toggle"> <input type="checkbox" id="cookiePreferences"> <span class="cookie-toggle-slider"></span> </label> </div> </div> <div class="cookie-modal-footer"> <button class="cookie-btn cookie-btn-reject" id="cookieModalCancel">Annuler</button> <button class="cookie-btn cookie-btn-accept" id="cookieSaveSettings">Sauvegarder</button> </div> </div> </div> <script>
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieModal = document.getElementById('cookieModal');
+    const cookieAcceptAll = document.getElementById('cookieAcceptAll');
+    const cookieSettings = document.getElementById('cookieSettings');
+    const cookieReject = document.getElementById('cookieReject');
+    const cookieModalCancel = document.getElementById('cookieModalCancel');
+    const cookieSaveSettings = document.getElementById('cookieSaveSettings');
+    const cookieAnalytics = document.getElementById('cookieAnalytics');
+    const cookieMarketing = document.getElementById('cookieMarketing');
+    const cookiePreferences = document.getElementById('cookiePreferences');
+
+    const CookieManager = {
+        set: function(name, value, days) {
+            let expires = '';
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = name + '=' + (value || '') + expires + '; path=/; SameSite=Lax';
+        },
+        get: function(name) {
+            const nameEQ = name + '=';
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        },
+        getConsent: function() {
+            const consent = this.get('wouri_cookie_consent');
+            if (consent) {
+                try { return JSON.parse(consent); } catch (e) { return null; }
+            }
+            return null;
+        },
+        saveConsent: function(preferences) {
+            this.set('wouri_cookie_consent', JSON.stringify(preferences), 365);
+        }
+    };
+
+    function checkCookieConsent() {
+        const consent = CookieManager.getConsent();
+        if (!consent) {
+            setTimeout(() => { cookieBanner.classList.add('active'); }, 1500);
+        }
+    }
+
+    function hideBanner() {
+        cookieBanner.classList.remove('active');
+    }
+
+    cookieAcceptAll.addEventListener('click', () => {
+        CookieManager.saveConsent({
+            essential: true, analytics: true, marketing: true, preferences: true,
+            timestamp: new Date().toISOString()
+        });
+        hideBanner();
+    });
+
+    cookieReject.addEventListener('click', () => {
+        CookieManager.saveConsent({
+            essential: true, analytics: false, marketing: false, preferences: false,
+            timestamp: new Date().toISOString()
+        });
+        hideBanner();
+    });
+
+    cookieSettings.addEventListener('click', () => {
+        const consent = CookieManager.getConsent();
+        if (consent) {
+            cookieAnalytics.checked = consent.analytics || false;
+            cookieMarketing.checked = consent.marketing || false;
+            cookiePreferences.checked = consent.preferences || false;
+        }
+        cookieModal.classList.add('active');
+    });
+
+    cookieModalCancel.addEventListener('click', () => {
+        cookieModal.classList.remove('active');
+    });
+
+    cookieModal.addEventListener('click', (e) => {
+        if (e.target === cookieModal) cookieModal.classList.remove('active');
+    });
+
+    cookieSaveSettings.addEventListener('click', () => {
+        CookieManager.saveConsent({
+            essential: true,
+            analytics: cookieAnalytics.checked,
+            marketing: cookieMarketing.checked,
+            preferences: cookiePreferences.checked,
+            timestamp: new Date().toISOString()
+        });
+        cookieModal.classList.remove('active');
+        hideBanner();
+    });
+
+    checkCookieConsent();
+</script> <!-- Header --><header class="header" id="header"> <div class="container"> <nav class="navbar"> <a href="#hero" class="logo"> <img src="/logos/logo-dark.png" alt="Wouri" class="logo-img logo-dark"> <img src="/logos/logo-light.png" alt="Wouri" class="logo-img logo-light" style="display: none;"> </a> <ul class="nav-menu" id="navMenu"> <li><a href="#services" class="nav-link">Services</a></li> <li><a href="#showcase" class="nav-link">Portfolio</a></li> <li><a href="#testimonials" class="nav-link">Avis</a></li> <li><a href="#contact" class="nav-link">Contact</a></li> </ul> <div class="nav-actions"> <a href="#contact" class="btn-nav"> <span>Demarrer</span> <i class="fas fa-arrow-right"></i> </a> <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"> <span class="stars"> <span class="star"></span> <span class="star"></span> <span class="star"></span> <span class="star"></span> </span> <i class="fas fa-sun toggle-icon sun-icon"></i> <i class="fas fa-moon toggle-icon moon-icon"></i> </button> <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"> <i class="fas fa-bars"></i> </button> </div> </nav> </div> </header> <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeOverlay = document.getElementById('themeOverlay');
+    const logoDark = document.querySelector('.logo-dark');
+    const logoLight = document.querySelector('.logo-light');
+    const footerLogoDark = document.querySelector('.footer-logo-dark');
+    const footerLogoLight = document.querySelector('.footer-logo-light');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('wouri-theme') || 'dark';
+    if (savedTheme === 'light') {
+        html.setAttribute('data-theme', 'light');
+        updateLogo('light');
+    }
+
+    themeToggle.addEventListener('click', (e) => {
+        const rect = themeToggle.getBoundingClientRect();
+        const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+        const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
+
+        themeOverlay.style.setProperty('--click-x', `${x}%`);
+        themeOverlay.style.setProperty('--click-y', `${y}%`);
+        themeOverlay.classList.add('active');
+        setTimeout(() => themeOverlay.classList.remove('active'), 600);
+
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('wouri-theme', newTheme);
+        updateLogo(newTheme);
+    });
+
+    function updateLogo(theme) {
+        if (theme === 'light') {
+            logoDark.style.display = 'none';
+            logoLight.style.display = 'block';
+            if (footerLogoDark) footerLogoDark.style.display = 'none';
+            if (footerLogoLight) footerLogoLight.style.display = 'block';
+        } else {
+            logoDark.style.display = 'block';
+            logoLight.style.display = 'none';
+            if (footerLogoDark) footerLogoDark.style.display = 'block';
+            if (footerLogoLight) footerLogoLight.style.display = 'none';
+        }
+    }
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('wouri-theme')) {
+            const newTheme = e.matches ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            updateLogo(newTheme);
+        }
+    });
+
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerOffset = document.querySelector('.header').offsetHeight;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+
+                // Close mobile menu after clicking a link
+                if (navMenu && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            }
+        });
+    });
+
+    // Active navigation highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function highlightNav() {
+        const scrollY = window.pageYOffset;
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 200;
+            const sectionId = section.getAttribute('id');
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightNav);
+
+</script> <main> <!-- Hero Section --><section id="hero" class="hero"> <!-- Background --> <div class="hero-bg"> <div class="hero-grid"></div> </div> <div class="container"> <div class="hero-content"> <div class="hero-text"> <h1 class="hero-title animate-on-scroll"> <span class="line">Nous construisons</span> <span class="line"> <span class="highlight"> <span class="highlight-text">l'avenir digital</span> </span> </span> </h1> <p class="hero-description animate-on-scroll">
+Solutions technologiques sur mesure qui transforment vos ambitions en realites numeriques. Code. Deploy. Scale.
+</p> <div class="hero-buttons animate-on-scroll"> <a href="#contact" class="btn btn-primary"> <span>Lancer votre projet</span> <i class="fas fa-arrow-right btn-icon-right"></i> </a> <a href="#showcase" class="btn btn-secondary"> <span>Voir nos realisations</span> </a> </div> <div class="hero-stats stagger-children"> <div class="hero-stat"> <div class="hero-stat-value counter-animate" data-target="200" data-suffix="+">0</div> <div class="hero-stat-label">Projets deployes</div> </div> <div class="hero-stat"> <div class="hero-stat-value">99.9<span>%</span></div> <div class="hero-stat-label">Uptime garanti</div> </div> <div class="hero-stat"> <div class="hero-stat-value counter-animate" data-target="10" data-suffix="+">0</div> <div class="hero-stat-label">Annees d'expertise</div> </div> </div> </div> <div class="hero-visual animate-on-scroll"> <div class="preview-container"> <div class="preview-card"> <!-- Browser Chrome --> <div class="preview-chrome"> <div class="preview-dots"> <span class="preview-dot"></span> <span class="preview-dot"></span> <span class="preview-dot"></span> </div> <div class="preview-url"> <i class="fas fa-lock"></i> <span>dashboard.wouri.dev</span> </div> <div class="preview-actions"> <button class="preview-action"><i class="fas fa-minus"></i></button> <button class="preview-action"><i class="fas fa-expand"></i></button> </div> </div> <!-- Dashboard Content --> <div class="preview-content"> <div class="preview-panel"> <div class="panel-header"> <span class="panel-title">CPU Usage</span> <span class="panel-badge"><i class="fas fa-circle"></i> Live</span> </div> <div class="panel-value">23%</div> <div class="panel-change"><i class="fas fa-arrow-down"></i> -5.2%</div> </div> <div class="preview-panel"> <div class="panel-header"> <span class="panel-title">Memory</span> <span class="panel-badge"><i class="fas fa-circle"></i> Live</span> </div> <div class="panel-value">4.2 GB</div> <div class="panel-change"><i class="fas fa-arrow-up"></i> +1.8%</div> </div> <div class="server-stats"> <div class="server-stat"> <div class="server-stat-icon"><i class="fas fa-globe"></i></div> <div class="server-stat-value">24</div> <div class="server-stat-label">Regions</div> </div> <div class="server-stat"> <div class="server-stat-icon"><i class="fas fa-server"></i></div> <div class="server-stat-value">156</div> <div class="server-stat-label">Instances</div> </div> <div class="server-stat"> <div class="server-stat-icon"><i class="fas fa-database"></i></div> <div class="server-stat-value">42TB</div> <div class="server-stat-label">Data</div> </div> <div class="server-stat"> <div class="server-stat-icon"><i class="fas fa-shield-alt"></i></div> <div class="server-stat-value">100%</div> <div class="server-stat-label">Secure</div> </div> </div> <div class="code-preview"> <div class="code-header"> <div class="code-tabs"> <span class="code-tab active">deploy.ts</span> <span class="code-tab">config.yaml</span> <span class="code-tab">docker</span> </div> </div> <div class="code-block"> <div class="code-line"> <span class="code-line-number">1</span> <span><span class="code-keyword">import</span> { <span class="code-variable">deploy</span> } <span class="code-keyword">from</span> <span class="code-string">'@wouri/cloud'</span>;</span> </div> <div class="code-line"> <span class="code-line-number">2</span> <span></span> </div> <div class="code-line"> <span class="code-line-number">3</span> <span><span class="code-keyword">await</span> <span class="code-function">deploy</span>({)</span> </div> <div class="code-line"> <span class="code-line-number">4</span> <span> <span class="code-variable">region</span>: <span class="code-string">'eu-west-3'</span>,</span> </div> <div class="code-line"> <span class="code-line-number">5</span> <span> <span class="code-variable">instances</span>: <span class="code-string">3</span>,</span> </div> <div class="code-line"> <span class="code-line-number">6</span> <span> <span class="code-variable">autoScale</span>: <span class="code-keyword">true</span></span> </div> <div class="code-line"> <span class="code-line-number">7</span> <span>});</span> </div> </div> </div> </div> </div> </div> </div> </div> </div> <div class="scroll-indicator animate-on-scroll"> <div class="scroll-mouse"></div> <span>Scroll</span> </div> </section> <!-- Trusted Section --><section class="trusted"> <div class="container"> <div class="trusted-content animate-on-scroll"> <p class="trusted-label">Ils nous font confiance</p> <div class="trusted-logos"> <span class="trusted-logo">Fintech Corp</span> <span class="trusted-logo">BankDigital</span> <span class="trusted-logo">CryptoSecure</span> <span class="trusted-logo">PayFlow</span> <span class="trusted-logo">InvestPro</span> <span class="trusted-logo">DataVault</span> </div> </div> </div> </section> <!-- Services Section --><section id="services" class="services"> <div class="container"> <div class="section-header animate-on-scroll"> <span class="section-badge"><i class="fas fa-cubes"></i> NOS SERVICES</span> <h2 class="section-title">Solutions de bout en bout</h2> <p class="section-description">
+De l'idee au deploiement, nous concevons des solutions technologiques qui propulsent votre croissance.
+</p> </div> <div class="bento-grid stagger-children"> <!-- Featured Card --> <div class="bento-item bento-lg bento-featured animate-on-scroll"> <div class="bento-content"> <div class="bento-icon"><i class="fas fa-code"></i></div> <h3 class="bento-title">Ingenierie Logicielle</h3> <p class="bento-text">
+Applications web et mobiles performantes, architectures microservices, APIs RESTful et GraphQL. Code propre, teste et maintenu.
+</p> <a href="#contact" class="bento-link">
+Decouvrir <i class="fas fa-arrow-right"></i> </a> </div> <div class="bento-image"> <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop" alt="Code"> <div class="bento-image-overlay"></div> </div> </div> <!-- Tech Stack --> <div class="bento-item bento-md bento-tech animate-on-scroll"> <div class="bento-content"> <div class="bento-icon"><i class="fas fa-layer-group"></i></div> <h3 class="bento-title">Stack Moderne</h3> <p class="bento-text">Technologies eprouvees et innovantes</p> <div class="tech-stack"> <span class="tech-badge"><i class="fab fa-react"></i> React</span> <span class="tech-badge"><i class="fab fa-node-js"></i> Node.js</span> <span class="tech-badge"><i class="fab fa-python"></i> Python</span> <span class="tech-badge"><i class="fab fa-aws"></i> AWS</span> <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span> <span class="tech-badge"><i class="fas fa-dharmachakra"></i> K8s</span> </div> </div> </div> <!-- Cloud --> <div class="bento-item bento-quarter animate-on-scroll"> <div class="bento-content"> <div class="bento-icon"><i class="fas fa-cloud"></i></div> <h3 class="bento-title">Cloud & DevOps</h3> <p class="bento-text">Infrastructure as Code, CI/CD, monitoring et scalabilite automatique.</p> <a href="#contact" class="bento-link">
+En savoir plus <i class="fas fa-arrow-right"></i> </a> </div> </div> <!-- Security --> <div class="bento-item bento-quarter animate-on-scroll"> <div class="bento-content"> <div class="bento-icon"><i class="fas fa-shield-alt"></i></div> <h3 class="bento-title">Cybersecurite</h3> <p class="bento-text">Audits de securite, pentesting, conformite RGPD et protection des donnees.</p> <a href="#contact" class="bento-link">
+En savoir plus <i class="fas fa-arrow-right"></i> </a> </div> </div> <!-- UX/UI --> <div class="bento-item bento-quarter animate-on-scroll"> <div class="bento-content"> <div class="bento-icon"><i class="fas fa-palette"></i></div> <h3 class="bento-title">Design UI/UX</h3> <p class="bento-text">Interfaces intuitives, design systems, prototypage et tests utilisateurs pour des experiences memorables.</p> <a href="#contact" class="bento-link">
+En savoir plus <i class="fas fa-arrow-right"></i> </a> </div> </div> <!-- Data --> <div class="bento-item bento-quarter animate-on-scroll"> <div class="bento-content"> <div class="bento-icon"><i class="fas fa-brain"></i></div> <h3 class="bento-title">Data & Intelligence</h3> <p class="bento-text">Big Data, Machine Learning, analytics avances et tableaux de bord en temps reel.</p> <a href="#contact" class="bento-link">
+En savoir plus <i class="fas fa-arrow-right"></i> </a> </div> </div> </div> </div> </section> <!-- Showcase Section --><section id="showcase" class="showcase"> <div class="container"> <div class="showcase-grid"> <div class="showcase-content animate-on-scroll"> <span class="section-badge"><i class="fas fa-rocket"></i> PORTFOLIO</span> <h2 class="section-title">Projets qui comptent</h2> <p class="section-description">
+Des solutions deployees en production qui generent de la valeur pour nos clients chaque jour.
+</p> <div class="feature-list stagger-children"> <div class="feature-item"> <div class="feature-icon"><i class="fas fa-server"></i></div> <div class="feature-content"> <h4>Infrastructure Cloud</h4> <p>Architectures haute disponibilite, multi-region</p> </div> </div> <div class="feature-item"> <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div> <div class="feature-content"> <h4>Applications Mobiles</h4> <p>iOS, Android, React Native, Flutter</p> </div> </div> <div class="feature-item"> <div class="feature-icon"><i class="fas fa-chart-line"></i></div> <div class="feature-content"> <h4>Dashboards Analytics</h4> <p>Visualisation de donnees en temps reel</p> </div> </div> </div> </div> <div class="showcase-visual animate-on-scroll"> <div class="showcase-gallery stagger-children"> <div class="showcase-item"> <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=450&fit=crop" alt="Server infrastructure"> <div class="showcase-item-overlay"> <div> <span class="showcase-item-tag"><i class="fas fa-cloud"></i> Cloud</span> <h4 class="showcase-item-title">Infrastructure Cloud</h4> </div> </div> </div> <div class="showcase-item"> <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=450&fit=crop" alt="Dashboard analytics"> <div class="showcase-item-overlay"> <div> <span class="showcase-item-tag"><i class="fas fa-chart-bar"></i> Data</span> <h4 class="showcase-item-title">Dashboard Analytics</h4> </div> </div> </div> <div class="showcase-item"> <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=450&fit=crop" alt="Code development"> <div class="showcase-item-overlay"> <div> <span class="showcase-item-tag"><i class="fas fa-code"></i> Dev</span> <h4 class="showcase-item-title">API Platform</h4> </div> </div> </div> <div class="showcase-item"> <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=450&fit=crop" alt="Security"> <div class="showcase-item-overlay"> <div> <span class="showcase-item-tag"><i class="fas fa-shield-alt"></i> Security</span> <h4 class="showcase-item-title">Cybersecurite</h4> </div> </div> </div> </div> </div> </div> </div> </section> <!-- Testimonials --><section id="testimonials" class="testimonials"> <div class="container"> <div class="section-header animate-on-scroll"> <span class="section-badge"><i class="fas fa-star"></i> TEMOIGNAGES</span> <h2 class="section-title">Ce qu'ils disent de nous</h2> <p class="section-description">
+La satisfaction de nos clients est notre meilleure recompense.
+</p> </div> <div class="testimonials-grid stagger-children"> <div class="testimonial-card animate-on-scroll"> <div class="testimonial-rating"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> </div> <p class="testimonial-text">
+"Une equipe technique exceptionnelle. Ils ont transforme notre vision en une plateforme robuste et scalable. Le code est propre et bien documente."
+</p> <div class="testimonial-author"> <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Avatar" class="testimonial-avatar"> <div> <div class="testimonial-name">Marc Dubois</div> <div class="testimonial-role">CTO, TechVentures</div> </div> </div> </div> <div class="testimonial-card animate-on-scroll"> <div class="testimonial-rating"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> </div> <p class="testimonial-text">
+"Professionnalisme, reactivite et expertise technique au rendez-vous. Notre application gere maintenant 10x plus de trafic sans aucun probleme."
+</p> <div class="testimonial-author"> <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Avatar" class="testimonial-avatar"> <div> <div class="testimonial-name">Sophie Martin</div> <div class="testimonial-role">CEO, FinanceFlow</div> </div> </div> </div> <div class="testimonial-card animate-on-scroll"> <div class="testimonial-rating"> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> </div> <p class="testimonial-text">
+"De la conception au deploiement, tout etait parfait. Leur approche DevOps nous permet de livrer des features 3x plus rapidement."
+</p> <div class="testimonial-author"> <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Avatar" class="testimonial-avatar"> <div> <div class="testimonial-name">Pierre Laurent</div> <div class="testimonial-role">VP Engineering, DataPro</div> </div> </div> </div> </div> </div> </section> <!-- CTA Section --><section class="cta"> <div class="container"> <div class="cta-content animate-on-scroll"> <h2 class="cta-title">Pret a scaler votre business ?</h2> <p class="cta-text">
+Discutons de votre prochain projet et voyons comment nous pouvons vous aider a atteindre vos objectifs.
+</p> <div class="cta-buttons"> <a href="#contact" class="btn btn-primary"> <span>Planifier un appel</span> <i class="fas fa-calendar btn-icon-right"></i> </a> <a href="mailto:contact@wouri.com" class="btn btn-secondary"> <i class="fas fa-envelope"></i> <span>contact@wouri.com</span> </a> </div> </div> </div> </section> <!-- Contact Section --><section id="contact" class="contact"> <div class="container"> <div class="section-header animate-on-scroll"> <span class="section-badge"><i class="fas fa-envelope"></i> CONTACT</span> <h2 class="section-title">Parlons de votre projet</h2> <p class="section-description">
+Notre equipe est prete a vous accompagner dans votre transformation digitale.
+</p> </div> <div class="contact-grid"> <div class="contact-info animate-on-scroll"> <h3>Let's build together</h3> <p>Que vous ayez un projet en tete ou besoin de conseils, nous sommes la pour vous aider a reussir.</p> <div class="contact-details"> <div class="contact-item"> <div class="contact-item-icon"><i class="fas fa-phone"></i></div> <div class="contact-item-content"> <span>Telephone</span> <a href="tel:+33646870856">+33 6 46 87 08 56</a> </div> </div> <div class="contact-item"> <div class="contact-item-icon"><i class="fas fa-envelope"></i></div> <div class="contact-item-content"> <span>Email</span> <a href="mailto:contact@wouri.com">contact@wouri.com</a> </div> </div> <div class="contact-item"> <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div> <div class="contact-item-content"> <span>Adresse</span> <p>60 rue Francois 1er, 75008 Paris</p> </div> </div> </div> <div class="contact-social"> <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a> <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a> <a href="#" class="social-link" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a> </div> </div> <div class="contact-form-wrapper animate-on-scroll"> <form class="contact-form" id="contactForm"> <div class="form-row"> <div class="form-group"> <label for="name">Nom</label> <input type="text" id="name" name="name" placeholder="John Doe" required> </div> <div class="form-group"> <label for="email">Email</label> <input type="email" id="email" name="email" placeholder="john@company.com" required> </div> </div> <div class="form-group"> <label for="company">Entreprise</label> <input type="text" id="company" name="company" placeholder="Votre entreprise"> </div> <div class="form-group"> <label for="message">Message</label> <textarea id="message" name="message" placeholder="Decrivez votre projet..." required></textarea> </div> <button type="submit" class="btn btn-primary"> <span>Envoyer</span> <i class="fas fa-paper-plane btn-icon-right"></i> </button> </form> </div> </div> </div> </section> <script>
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Message envoye ! Nous vous contacterons bientot.');
+            contactForm.reset();
+        });
+    }
+</script> </main> <!-- Footer --><footer class="footer"> <div class="container"> <div class="footer-grid"> <div class="footer-brand"> <img src="/logos/logo-dark.png" alt="Wouri" class="logo-img footer-logo-dark"> <img src="/logos/logo-light.png" alt="Wouri" class="logo-img footer-logo-light" style="display: none;"> <p>Studio d'innovation digitale base a Paris. Nous construisons des solutions technologiques qui font la difference.</p> <div class="footer-social"> <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a> <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a> <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a> </div> </div> <div class="footer-section"> <h4>Navigation</h4> <ul class="footer-links"> <li><a href="#services">Services</a></li> <li><a href="#showcase">Portfolio</a></li> <li><a href="#testimonials">Temoignages</a></li> <li><a href="#contact">Contact</a></li> </ul> </div> <div class="footer-section"> <h4>Services</h4> <ul class="footer-links"> <li><a href="#">Ingenierie Logicielle</a></li> <li><a href="#">Cloud & DevOps</a></li> <li><a href="#">Cybersecurite</a></li> <li><a href="#">Design UI/UX</a></li> </ul> </div> <div class="footer-section"> <h4>Contact</h4> <div class="footer-contact-item"> <i class="fas fa-map-marker-alt"></i> <span>60 rue Francois 1er, 75008 Paris</span> </div> <div class="footer-contact-item"> <i class="fas fa-phone"></i> <a href="tel:+33646870856">+33 6 46 87 08 56</a> </div> <div class="footer-contact-item"> <i class="fas fa-envelope"></i> <a href="mailto:contact@wouri.com">contact@wouri.com</a> </div> </div> </div> <div class="footer-bottom"> <p>&copy; <span id="currentYear"></span> Wouri. All rights reserved.</p> <div class="footer-legal"> <a href="#">Mentions legales</a> <a href="#">Politique de confidentialite</a> </div> </div> </div> </footer> <script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script> <!-- Global Scripts — Minimal --><script>
+    // Scroll animations with IntersectionObserver
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -80px 0px',
+        threshold: 0.1
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+
+                // Animate counters
+                if (entry.target.classList.contains('counter-animate')) {
+                    animateCounter(entry.target);
+                }
+
+                // Stagger children animation
+                if (entry.target.classList.contains('stagger-children')) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.classList.add('visible');
+                        }, index * 80);
+                    });
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll, .stagger-children, .counter-animate').forEach(el => {
+        animationObserver.observe(el);
+    });
+
+    // Counter animation
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target')) || 0;
+        const duration = 1500;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                element.textContent = Math.floor(current) + (element.getAttribute('data-suffix') || '');
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = target + (element.getAttribute('data-suffix') || '');
+            }
+        };
+        updateCounter();
+    }
+</script>  <script>
+        // Apply saved theme immediately to prevent flash
+        const savedTheme = localStorage.getItem('wouri-theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script> </body> </html> 
