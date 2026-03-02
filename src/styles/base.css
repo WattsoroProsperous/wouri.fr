@@ -16,7 +16,7 @@ html {
 body {
     font-family: var(--font-body);
     line-height: 1.6;
-    color: var(--neutral-800);
+    color: var(--neutral-300);
     background: var(--neutral-950);
     overflow-x: hidden;
     max-width: 100vw;
@@ -41,25 +41,24 @@ button {
 }
 
 ::selection {
-    background: var(--brand-orange);
+    background: var(--accent);
     color: var(--white);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--neutral-900);
+    background: var(--neutral-950);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--neutral-700);
-    border-radius: 5px;
+    background: var(--neutral-600);
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--neutral-600);
+    background: var(--neutral-500);
 }
-
